@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -12,18 +10,19 @@ public class LevelManager : MonoBehaviour
     public TMP_Text levelClearText;
     private int levelTargets;
     private int hitTargets;
+    public Text targetCountText;
 
     // Start is called before the first frame update
     void Start()
-    {
+    { 
         levelTargets = GameObject.FindGameObjectsWithTag("Target").Length;
         hitTargets = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        print(TargetLogic.targetCount);
+        targetCountText.text = "Remaining Target Count Is: " + TargetLogic.targetCount.ToString();
     }
 
     public void IncrementHitTargets() {
@@ -45,5 +44,10 @@ public class LevelManager : MonoBehaviour
 
     void RestartLevel() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void LoadLevel(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 }

@@ -5,13 +5,14 @@ public class TargetLogic : MonoBehaviour
     public GameObject targetToActivate;
     public bool deactivate = false;
     public AudioClip hitSoundEffect;
-
     private LevelManager levelManager;
-
     private bool hit = false;
+    public static int targetCount = 0;
 
     void Start() {
+        targetCount += 1; 
         levelManager = GameObject.FindObjectOfType<LevelManager>();
+        print("Count is: " + targetCount);
     }
 
     private void OnCollisionEnter(Collision other)
@@ -34,6 +35,7 @@ public class TargetLogic : MonoBehaviour
     }
 
     public bool isHit() {
+        targetCount -= 1;
         return hit;
     }
 }
